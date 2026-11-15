@@ -1,0 +1,47 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    Self-contained test runner for the pure Arabic engine (Source/ArabicAutoTranslation/Arabic/Core).
+
+    No NuGet test framework is used on purpose: the runner is a plain console program that prints a report
+    and returns a non-zero exit code when any check fails, so the CI workflow stops before building.
+
+    It compiles the Core sources directly (they have no Verse / Unity dependency) with LangVersion 7.3 -
+    the same language level as the game assemblies - and runs on .NET 8 and on .NET Framework 4.7.2:
+
+    Run it from this folder (the command line options of the workflow are the same):
+        dotnet run -c Release -f net8.0
+        dotnet run -c Release -f net472
+  -->
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFrameworks>net8.0;net472</TargetFrameworks>
+    <LangVersion>7.3</LangVersion>
+    <AssemblyName>ArabicAutoTranslation.Tests</AssemblyName>
+    <RootNamespace>ArabicAutoTranslation.Tests</RootNamespace>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <Deterministic>true</Deterministic>
+    <NoWarn>$(NoWarn);CS1701;CS1702</NoWarn>
+    <CoreSource>$(MSBuildThisFileDirectory)..\ArabicAutoTranslation\Arabic\Core</CoreSource>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="*.cs" />
+    <Compile Include="$(CoreSource)\**\*.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- The glossary the game ships: the tests parse the real file, not a copy. -->
+    <None Include="..\..\Arabic\ArabicGlossary.txt" Link="Data\ArabicGlossary.txt" CopyToOutputDirectory="PreserveNewest" />
+    <!-- The terminology list the project was given: the tests check that the shipped glossary covers every term of it. -->
+    <None Include="Data\RimWorld_Glossary.reference.txt" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'net472'">
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3" PrivateAssets="all" />
+  </ItemGroup>
+
+</Project>

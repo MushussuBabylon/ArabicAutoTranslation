@@ -1,0 +1,168 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{74803000-0D56-40EB-ACCB-B0A0A6674497}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ArabicAutoTranslation</RootNamespace>
+    <AssemblyName>ArabicAutoTranslation</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\1.5\Assemblies\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug1.4|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>..\..\1.4\Assemblies\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;RW14</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug1.6|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>..\..\1.6\Assemblies\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release1.6|AnyCPU'">
+    <DebugSymbols>false</DebugSymbols>
+    <OutputPath>..\..\1.6\Assemblies\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>none</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="0Harmony, Version=2.3.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\workshop\content\294100\2009463077\Current\Assemblies\0Harmony.dll</HintPath>
+    </Reference>
+    <Reference Include="Assembly-CSharp">
+      <HintPath>..\..\..\..\RimWorldWin64_Data\Managed\Assembly-CSharp.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>..\..\..\..\RimWorldWin64_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.IMGUIModule">
+      <HintPath>..\..\..\..\RimWorldWin64_Data\Managed\UnityEngine.IMGUIModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.TextRenderingModule">
+      <HintPath>..\..\..\..\RimWorldWin64_Data\Managed\UnityEngine.TextRenderingModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UnityWebRequestModule">
+      <HintPath>..\..\..\..\RimWorldWin64_Data\Managed\UnityEngine.UnityWebRequestModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Mono.Security">
+      <HintPath>..\..\..\..\RimWorldWin64_Data\Managed\Mono.Security.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Services\APIKeyRotater.cs" />
+    <Compile Include="Services\GistService.cs" />
+    <Compile Include="Services\NetworkStateMonitor.cs" />
+    <Compile Include="UI\Dialog_GistMerge.cs" />
+    <Compile Include="UI\Dialog_GistPreview.cs" />
+    <Compile Include="CompatibilityPatches.cs" />
+    <Compile Include="Utilities\DefInjectionUtilityCustom.cs" />
+    <Compile Include="UI\Dialog_BulkReplace.cs" />
+    <Compile Include="ArabicAutoTranslation.cs" />
+    <Compile Include="Utilities\Helpers.cs" />
+    <Compile Include="Utilities\KeyedUtility.cs" />
+    <Compile Include="Services\LanguageDetector.cs" />
+    <Compile Include="Utilities\MigrationHelper.cs" />
+    <Compile Include="Utilities\NetworkHelper.cs" />
+    <Compile Include="Utilities\RateLimiter.cs" />
+    <Compile Include="Utilities\MonoTlsClient.cs" />
+    <Compile Include="Utilities\ReflectionCache.cs" />
+    <Compile Include="Settings.cs" />
+    <Compile Include="Patches.cs" />
+    <Compile Include="StaticConstructor.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\InjectionManager.cs" />
+    <Compile Include="Services\TranslationCacheManager.cs" />
+    <Compile Include="Services\TranslatorManager.cs" />
+    <Compile Include="Translators\ITranslator.cs" />
+    <Compile Include="Translators\TranslatorSettings.cs" />
+    <Compile Include="Translators\TranslatorSettings_AIModel.cs" />
+    <Compile Include="Translators\TranslatorSettings_DeepL.cs" />
+    <Compile Include="Translators\TranslatorSettings_LibreTranslate.cs" />
+    <Compile Include="Translators\Translator_ChatGPT.cs" />
+    <Compile Include="Translators\Translator_Claude.cs" />
+    <Compile Include="Translators\Translator_ClaudeCode.cs" />
+    <Compile Include="Translators\Translator_DeepL_Pro.cs" />
+    <Compile Include="Translators\Translator_DeepL.cs" />
+    <Compile Include="Translators\Translator_DeepSeek.cs" />
+    <Compile Include="Translators\Translator_Gemini.cs" />
+    <Compile Include="Translators\Translator_Google.cs" />
+    <Compile Include="Translators\Translator_LibreTranslate.cs" />
+    <Compile Include="Translators\Translator_OpenAICompatible.cs" />
+    <Compile Include="Translators\Translator_Papago.cs" />
+    <Compile Include="Translators\Translator_Yandex.cs" />
+    <Compile Include="Translators\Translator_BaseOnlineAIModel.cs" />
+    <Compile Include="Translators\Translator_BaseTraditional.cs" />
+    <Compile Include="Arabic\Core\ArabicShaper.cs" />
+    <Compile Include="Arabic\Core\ArabicTables.cs" />
+    <Compile Include="Arabic\Core\ArabicVersions.cs" />
+    <Compile Include="Arabic\Core\Bidi.cs" />
+    <Compile Include="Arabic\Core\CodePoints.cs" />
+    <Compile Include="Arabic\Core\DisplayProcessor.cs" />
+    <Compile Include="Arabic\Core\Fnv64.cs" />
+    <Compile Include="Arabic\Core\UnicodeData.cs" />
+    <Compile Include="Arabic\Core\Cache\ArabicCacheEntry.cs" />
+    <Compile Include="Arabic\Core\Cache\ArabicCacheFormat.cs" />
+    <Compile Include="Arabic\Core\Cache\ArabicCacheMaintenance.cs" />
+    <Compile Include="Arabic\Core\Cache\ArabicCacheStore.cs" />
+    <Compile Include="Arabic\Core\Cache\ArabicModCache.cs" />
+    <Compile Include="Arabic\Core\Glossary\GlossaryIndex.cs" />
+    <Compile Include="Arabic\Core\Glossary\GlossaryModel.cs" />
+    <Compile Include="Arabic\Core\Glossary\GlossaryParser.cs" />
+    <Compile Include="Arabic\Core\Grammar\ArabicText.cs" />
+    <Compile Include="Arabic\Core\Grammar\PronounRules.cs" />
+    <Compile Include="Arabic\Core\Pipeline\ArabicPipeline.cs" />
+    <Compile Include="Arabic\Core\Pipeline\Placeholders.cs" />
+    <Compile Include="Arabic\Core\Pipeline\TextSegmenter.cs" />
+    <Compile Include="Arabic\Integration\ArabicIntegration.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

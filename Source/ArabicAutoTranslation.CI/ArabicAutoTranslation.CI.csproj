@@ -1,0 +1,90 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    CI / command-line build project for RimWorld 1.4, 1.5 and 1.6.
+
+    The "classic" project (Source/ArabicAutoTranslation/ArabicAutoTranslation.csproj) needs a RimWorld install at a fixed
+    relative path (HintPath ..\..\..\..\RimWorldWin64_Data\Managed). This SDK-style project compiles the very
+    same sources against the public reference-assembly NuGet package instead, so it builds on any machine
+    (it is what .github/workflows/build.yml uses).
+
+        dotnet build Source/ArabicAutoTranslation.CI/ArabicAutoTranslation.CI.csproj -c Release -p:RimWorldVersion=1.6 -o build/1.6
+
+    RimWorld 1.7 is not built here: it runs on .NET 10 and has its own project,
+    Source/ArabicAutoTranslation.RW17/ArabicAutoTranslation.RW17.csproj (also used by .github/workflows/build.yml).
+  -->
+
+  <PropertyGroup>
+    <TargetFramework>net472</TargetFramework>
+    <LangVersion>7.3</LangVersion>
+    <AssemblyName>ArabicAutoTranslation</AssemblyName>
+    <RootNamespace>ArabicAutoTranslation</RootNamespace>
+
+    <!-- 1.6 | 1.5 | 1.4  (choose with -p:RimWorldVersion=...) -->
+    <RimWorldVersion Condition="'$(RimWorldVersion)' == ''">1.6</RimWorldVersion>
+
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <Deterministic>true</Deterministic>
+    <Optimize>true</Optimize>
+    <DebugType>none</DebugType>
+    <DebugSymbols>false</DebugSymbols>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
+    <GenerateDependencyFile>false</GenerateDependencyFile>
+    <SatelliteResourceLanguages>en</SatelliteResourceLanguages>
+    <NoWarn>$(NoWarn);CS1701;CS1702;CS0618;CS0649;CS0169;CS0414;NU1701</NoWarn>
+
+    <SharedSource>$(MSBuildThisFileDirectory)..\ArabicAutoTranslation</SharedSource>
+  </PropertyGroup>
+
+  <!-- Which public reference assemblies to compile against. Override with -p:RimWorldRefVersion=1.6.4633 if needed. -->
+  <PropertyGroup>
+    <RimWorldRefVersion Condition="'$(RimWorldRefVersion)' == '' And '$(RimWorldVersion)' == '1.6'">1.6.*</RimWorldRefVersion>
+    <RimWorldRefVersion Condition="'$(RimWorldRefVersion)' == '' And '$(RimWorldVersion)' == '1.5'">1.5.*</RimWorldRefVersion>
+    <RimWorldRefVersion Condition="'$(RimWorldRefVersion)' == '' And '$(RimWorldVersion)' == '1.4'">1.4.*</RimWorldRefVersion>
+  </PropertyGroup>
+
+  <!-- The 1.4 build is the only one that defines RW14 (see Settings.cs / DefInjectionUtilityCustom.cs). -->
+  <PropertyGroup Condition="'$(RimWorldVersion)' == '1.4'">
+    <DefineConstants>$(DefineConstants);RW14</DefineConstants>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="$(SharedSource)\**\*.cs" Exclude="$(SharedSource)\obj\**;$(SharedSource)\bin\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Krafs.Rimworld.Ref" Version="$(RimWorldRefVersion)" PrivateAssets="all" />
+    <PackageReference Include="Lib.Harmony" Version="2.3.*" ExcludeAssets="runtime" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3" PrivateAssets="all" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+  </ItemGroup>
+
+  <!--
+    MonoTlsClient.cs (used only by the optional Google translator) needs Mono.Security.dll. If the reference
+    package does not provide it, compile the file's stub branch instead (same code path RimWorld 1.7 uses).
+    Yandex, the translator used for Arabic, does not depend on it.
+  -->
+  <Target Name="AtDetectMonoSecurity" AfterTargets="ResolveAssemblyReferences" BeforeTargets="CoreCompile">
+    <ItemGroup>
+      <AtMonoSecurityRef Include="@(ReferencePath)" Condition="'%(Filename)' == 'Mono.Security'" />
+    </ItemGroup>
+    <PropertyGroup Condition="'@(AtMonoSecurityRef)' == ''">
+      <DefineConstants>$(DefineConstants);AT_NO_MONO_SECURITY</DefineConstants>
+    </PropertyGroup>
+    <Message Importance="high" Condition="'@(AtMonoSecurityRef)' == ''"
+             Text="Mono.Security was not found in the reference set: building MonoTlsClient as the stub (AT_NO_MONO_SECURITY)." />
+  </Target>
+
+</Project>

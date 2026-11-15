@@ -1,0 +1,448 @@
+RimWorld Terminology Glossary
+
+Use the following translations consistently. English term → Required Arabic translation.
+Do not replace these translations with synonyms unless context requires a grammatical form.
+If the same English term has different meanings in different DLCs, use the translation specified under the relevant section. Remove ال or add it accordingly.
+
+CORE / BASE GAME
+
+General Terms
+
+Colonist → مستعمر
+Spot → مكان ( for example, sleeping spot → مكان نوم )
+Implant → زرعة
+Warden → حارس
+Turret → برج
+Shuttle → مكوك
+Transport Pod → كبسولة نقل
+
+Technology and Materials
+
+Mechanoid / Mech → ميكانويد
+Mechanoids / Mechs → ميكانويدات
+Chemfuel → وقود كيميائي
+archotechnological → تكنولوجيا آركوتيكية
+Glitterworld → العالم اللامع
+Medieval → العصور الوسطى
+Slag → خردة
+Chunk → كتلة
+
+ROYALTY
+
+Faction and Characters
+
+The Empire → الإمبراطورية
+Royal Tribute Collector → جامع الجزية الإمبراطوري
+Deserter → منشق
+Imperial Trooper → جندي إمبراطوري
+Janissary → إنكشاري
+Cataphract → كاتافراكت
+
+Psychic System
+
+Psycaster → مستخدم القدرات النفسية
+Psycast → قدرة نفسية
+Psyfocus → تركيز نفسي
+Psylink → وصلة نفسية
+Psytrainer → مدرب القدرات النفسية
+Psychic Amplifier → مضخم نفسي
+Psychic Sensitivity → الحساسية النفسية
+Neural Heat → حرارة عصبية
+Meditation → تأمل
+Psychic → نفسي
+Psychic Drone → طنين نفسي
+Psychic Soothe → تهدئة نفسية
+Psychic Suppressor → مثبط نفسي
+
+Buildings and Items
+
+Death Acidifier → مذيب الجثة الحمضي
+Mech Cluster → عنقود ميكانويدات
+Throne Room → غرفة العرش
+Throne → عرش
+Royal Bed → سرير ملكي
+Imperial Armor → درع إمبراطوري
+Honor → شرف
+Permits → تصاريح
+Royal Permit → تصريح ملكي
+
+Social and Royal Titles
+
+Conceited Pawn → مستعمر متغطرس
+Freeholder → نبيل حر
+Novice → مبتدئ
+Acolyte → مرافق
+Knight → فارس
+Dame → فارسة
+Praetor → بريتور
+Baron → بارون
+Baroness → بارونة
+Archon → أركون
+Dominus → دومينوس
+Consul → قنصل
+Stellarch → ستيلارك
+High Stellarch → الستيلارك الأعلى
+Emperor → إمبراطور
+Empress → إمبراطورة
+Royal Title → لقب ملكي
+
+IDEOLOGY
+
+Core Ideology System
+
+Ideology → عقيدة
+Ideoligion → عقيدة
+Meme → مبدأ
+Precept → وصية
+Ritual → طقس
+Conversion → تحويل العقيدة
+Archonexus → الآركونيكسس
+Certainty → اليقين
+Role → دور
+Specialist → أخصائي
+Moral Guide → مرشد أخلاقي
+Relic → أثر مقدس
+Reliquary → ضريح الأثر المقدس
+
+Gauranlen and Dryads
+
+Gauranlen Tree → شجرة غورانلين
+Dryad → درايد
+Barkskin → لحائي
+Berrymaker → صانع التوت
+Carrier → ناقل
+Clawer → مخلبي
+Gaumaker → صانع الغاو
+Medicine Maker → صانع الأدوية
+Woodmaker → صانع الخشب
+Pod → جراب
+Tree Connection → رابطة الأشجار
+
+Memes
+
+Animal Personhood → مكانة الحيوان
+Blindsight → تقديس العمى
+Cannibal → أكل لحوم البشر
+Collectivist → الجماعية
+Darkness → الظلام
+Female Supremacy → تفوق الإناث
+Flesh Purity → نقاء الجسد
+Guilty → الشعور بالذنب
+High Life → حياة النشوة
+Human Primacy → السمو البشري
+Individualist → الفردية
+Loyalist → الولاء
+Male Supremacy → تفوق الذكور
+Nature Primacy → أولوية الطبيعة
+Nudism → العري
+Pain is Virtue → الألم فضيلة
+Proselytizer → التبشير
+Raider → الغزو
+Rancher → تربية المواشي
+Supremacist → التفوق
+Transhumanist → ما بعد إنساني
+Tunneler → ناسك الأنفاق
+
+Important Ideology Concepts
+
+Preferred Apparel → الملابس المفضلة
+Required Apparel → الملابس المطلوبة
+Apparel → ملابس
+Style → نمط
+Ideology Development → تطور العقيدة
+Development Points → نقاط التطوير
+Social Role → دور اجتماعي
+
+BIOTECH
+
+Genetics
+
+Gene → مورثة
+Xenogene → مورثة دخيلة
+Germline Gene → مورثة سلالية
+Xenogerm → زينوجرم
+Gene Implanter → زارع المورثات
+Gene Bank → بنك المورثات
+Gene Extractor → مستخرج المورثات
+Gene Assembler → مجمّع المورثات
+Genepack → حزمة مورثات
+Genetic → وراثي
+Xenotype → نمط جيني
+Xenotype Editor → محرر النمط الجيني
+Metabolism → الأيض
+Archite → آركايت
+Archite Capsule → كبسولة آركايت
+
+Pollution
+
+Pollution → التلوث
+Wastepack → حزمة نفايات
+Toxic Wastepack → حزمة نفايات سامة
+Toxifier → مولّد السموم
+Pollux Tree → شجرة بولوكس
+Tox Gas → غاز سام
+
+Sanguophage System
+
+Hemogen → هيموجين
+Hemogen Pack → حقيبة هيموجين
+Hemogen Extractor → مستخرج الهيموجين
+Sanguophage → سانغوفاج
+Deathrest → سبات الموت
+Deathrest Casket → تابوت سبات الموت
+Deathrest Accelerator → مسرّع سبات الموت
+
+Mechanitor and Mechanoids
+
+Mechanitor → ميكانيتور
+Mechlink → وصلة الميكانيتور
+Control Pack → حزمة تحكم
+Bandwidth → عرض النطاق
+Bandwidth Pack → حزمة عرض النطاق
+Subcore → النواة الفرعية
+
+Subcore Encoder → مشفر النواة الفرعية
+Mech Gestator → حاضنة الميكانويدات
+Mech Gestation → احتضان الميكانويدات
+
+Utility Mechanoids
+
+Agrihand → يد زراعية
+Constructoid → بناء
+Fabricor → صانع
+Paramedic → مسعف
+Lifter → ناقل
+Cleansweeper → المنظف
+
+Combat Mechanoids
+
+Militor → ميليتور
+Scyther → منجلي
+Centipede → حريش
+Lancer → رامح
+Pikeman → رماح
+Tunneler → حفار
+Scorcher → حارق
+Legionary → ليجيوناري
+Tesseron → تيسيرون
+Centurion → سنتوريون
+Bishop → أسقف
+Diabolus → ديابولوس
+Apocriton → أبوكريتون
+War Queen → ملكة الحرب
+War Urchin → قنفذ الحرب
+
+Growth and Reproduction
+
+Pregnancy → الحمل
+Children → الأطفال
+Child → طفل
+Growth Vat → حوض النمو
+Growth Moment → مرحلة نمو
+Growth Tier → مستوى النمو
+Gestation → فترة الحمل
+Gestation Period → مدة الحمل
+
+Xenotypes
+
+Baseliner → البشري الأساسي
+Waster → وايستر
+Dirtmole → الخلد الترابي
+Genie → جيني
+Highmate → هايميت
+Hussar → هوسار
+Impid → إمبيد
+Neanderthal → نياندرتال
+Pigskin → شبيه خنزير
+Sanguophage → سانغوفاج
+Starjack → ستارجاك
+Yttakin → يتاكين
+
+ANOMALY
+
+Core Concepts
+
+Entity → كيان
+Entities → كيانات
+Void → الفراغ
+Monolith → مسلة
+Obelisk → مسلة
+Void Monolith → مسلة الفراغ
+Containment → احتواء
+Containment Facility → منشأة الاحتواء
+Containment Cell → غرفة احتواء
+Entity Codex → سجل الكيانات
+Study → دراسة
+Study Interval → فترة الدراسة
+Psychic Ritual → طقس نفسي
+The Void Ending → نهاية الفراغ
+
+Entities and Creatures
+
+Harbinger Tree → شجرة النذير
+Fleshbeast →  وحش اللحم ( أو وحش لحم )
+Sightstealer → سارق الأبصار
+Shambler → المترنح
+Ghoul → الغول
+Gorehulk → عملاق الأحشاء
+Dreadmeld → دريدميلد
+bulbfreak → بالبفريك
+Chimera → الكيميرا
+Devourer → الملتهم
+Noctol → الليلي
+Revenant → العائد من الموت
+Metalhorror → رعب المعدن
+Nociosphere → كرة الأذى
+Golden Cube → المكعب الذهبي
+Unnatural Corpse → جثة غير طبيعية
+
+Structures and Objects
+
+Void Monolith → مسلة الفراغ
+Noctolith → مسلة الليل
+Pit Gate → بوابة الحفرة
+Twisted Obelisk → المسلة الملتوية
+Corrupted Obelisk → المسلة الفاسدة
+Warped Obelisk → المسلة المشوهة
+Fleshmass → الكتلة اللحمية
+Fleshmass Heart → قلب الكتلة اللحمية
+Fleshmass Nucleus → نواة الكتلة اللحمية
+bliss lobotomy → استئصال الفص الجبهي للنعيم
+Void Structure → بنية الفراغ
+Void Node → عقدة الفراغ
+
+Resources and Events
+
+Bioferrite → بايوفيرايت
+Bioferrite Harvester → حاصدة البايوفيرايت
+Death Pall → كفن الموت
+Blood Rain → مطر الدم
+Unnatural Darkness → ظلام غير طبيعي
+Gray Flesh → لحم رمادي
+
+ODYSSEY
+
+Gravship and Gravtech
+
+Gravship → سفينة الجاذبية
+Gravcore → نواة الجاذبية
+Gravtech → تقنية الجاذبية
+Orbital Platform → منصة مدارية
+Grav Engine → محرك الجاذبية
+Grav Anchor → مرساة الجاذبية
+Gravship Launch → إطلاق سفينة الجاذبية
+Gravship Landing → هبوط سفينة الجاذبية
+Vacstone → حجر الفراغ
+
+Biomes and Terrain
+
+Glowforest → غابة التوهج
+Scarlands → أراضي الندوب
+Lava Fields → حقول الحمم
+Cliff → جرف
+Chasm → هوة
+Crevasse → شق
+Valley → وادٍ
+
+Odyssey Animals
+
+Alpha Thrumbo → ألفا ثرمبو
+Bog Hound → كلب المستنقعات
+Colossus Toad → ضفدع عملاق
+Great Wolf → الذئب العظيم
+Hive Queen → ملكة الخلية
+Larva → يرقة
+Lava Snail → حلزون الحمم
+Locust → جراد
+Mastodon → ماستودون
+Scimitar Cat → قط الشمشير
+Stone Crab → سرطان حجري
+
+Other Odyssey Systems
+
+Heavy Bridge → جسر ثقيل
+Sentience Catalyst → محفز الوعي
+Hunter Pack → حزمة الصياد
+Fishing → صيد السمك
+Fishing Spot → موقع صيد السمك
+
+
+STANDARDIZED TERMS (ADDED IN THE TERMINOLOGY REVIEW)
+
+These are the terms you chose in the terminology review. They are used in every DLC unless an entry says otherwise.
+Plural and feminine forms are shown in brackets. The terms above this section are unchanged.
+
+Body and Anatomy
+
+Leg → ساق ( plural: سيقان )
+Arm → الذراع ( left arm → الذراع اليسرى , right arm → الذراع اليمنى )
+Neck → رقبة
+Body → جسم ( Flesh Purity → نقاء الجسد above stays as it is )
+Point → رأس
+Treated → عولِج
+
+Items, Materials and Places
+
+Item → عنصر ( plural: عناصر )
+Drug → عقار ( plural: عقاقير ) ( Medicine → دواء stays )
+Stockpile → منطقة تخزين ( plural: مناطق تخزين ) ( ancient stockpile keeps مخزون )
+Camp → مخيم
+Barrel → ماسورة ( plural: مواسير )
+Dirt → تراب
+Granite → غرانيت
+Mote → أثر بصري
+
+People and Creatures
+
+Raider → غازي ( plural: غزاة ) ( the Ideology meme Raider → الغزو above stays )
+Creature → مخلوق
+Cadet → تلميذ عسكري
+Tinkerer → مصلح
+Assassin → مغتال ( feminine: مغتالة , plural: مغتالين )
+Herder → راعي ماشية ( feminine: راعية ماشية )
+Drifter → متجول
+Chef → طاه ( feminine: طاهية ) ( Cook → طباخ stays )
+Technician → تقني
+Scavenger → جامع خردة ( feminine: جامعة خردة , plural: جامعو خردة )
+
+Descriptions and States
+
+Mental → عقلي
+Bionic → إلكتروني حيوي
+Hostile → معادٍ
+Advanced → متقدم
+Unknown → مجهول
+Abhorrent → مقيت
+Cooldown → فترة انتظار ( Psychic Soothe → تهدئة نفسية above stays )
+Gestating mech → تكوين ميكانويد ( Mech Gestator and Mech Gestation above stay )
+Room impressiveness → فخامة الغرفة
+Left / right sight sensor → المستشعر البصري الأيسر / الأيمن
+Left / right hearing sensor → المستشعر السمعي الأيسر / الأيمن
+None / Nothing → لا شيء
+Misc → متنوعات
+
+Severity Words ( the same English word always gets the same Arabic word )
+
+Initial → أولي
+Minor → طفيف
+Mild → خفيف
+Moderate → متوسط
+Major → كبير
+Serious → خطير
+Severe → حاد
+Extreme → شديد
+
+Events and Actions
+
+Year → سنة
+Flashstorm → عاصفة برق خاطفة
+Sacrifice → تضحية
+Activate → تفعيل
+Investigate → تحقيق في ( for example, Investigate {0} → تحقيق في {0} )
+Executed prisoner → إعدام سجين
+Jump → قفزة
+Doing something → يفعل شيئاً
+Quest expired → انتهت صلاحية المهمة
+Quest completed → اكتملت المهمة
+Choose who should do this → اختر من سيفعل هذا
+Tab → تبويب

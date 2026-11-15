@@ -1,0 +1,130 @@
+name: Build Mod
+
+# Manual trigger only: Actions tab -> "Build Mod" -> "Run workflow".
+# Nothing here runs on push / pull_request / schedule.
+#
+# Result: the artifact "ArabicAutoTranslation" downloads as ArabicAutoTranslation.zip, and the zip contains the
+# ready-to-use mod folder "ArabicAutoTranslation": copy that folder into RimWorld/Mods, nothing else to do.
+# The folder holds About, Languages, the Arabic glossary and one folder per built RimWorld version
+# (1.7, 1.6, 1.5, 1.4), each with Assemblies/ArabicAutoTranslation.dll.
+on:
+  workflow_dispatch:
+    inputs:
+      build_1_7:
+        description: 'Build the RimWorld 1.7 assembly (1.7/Assemblies/ArabicAutoTranslation.dll, .NET 10)'
+        type: boolean
+        default: true
+      build_1_6:
+        description: 'Build the RimWorld 1.6 assembly (1.6/Assemblies/ArabicAutoTranslation.dll)'
+        type: boolean
+        default: true
+      build_1_5:
+        description: 'Build the RimWorld 1.5 assembly (1.5/Assemblies/ArabicAutoTranslation.dll)'
+        type: boolean
+        default: true
+      build_1_4:
+        description: 'Build the RimWorld 1.4 assembly (1.4/Assemblies/ArabicAutoTranslation.dll, RW14 build)'
+        type: boolean
+        default: false
+      run_tests:
+        description: 'Run the Arabic engine tests (shaping, BiDi, glossary, pronouns, cache) before building'
+        type: boolean
+        default: true
+      package_mod:
+        description: 'Also assemble the ready-to-install mod folder (artifact ArabicAutoTranslation)'
+        type: boolean
+        default: true
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      # .NET 8 runs the engine tests; .NET 10 compiles the RimWorld 1.7 assembly (RimWorld 1.7 runs on .NET 10).
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v6
+        with:
+          dotnet-version: |
+            8.0.x
+            10.0.x
+
+      # The tests exercise the pure Arabic engine (Source/ArabicAutoTranslation/Arabic/Core). They run on
+      # .NET 8 and on .NET Framework 4.7.2 (the runtime family the game's Mono is closest to).
+      # The runner returns a non-zero exit code on any failed check, which stops the workflow.
+      - name: Run Arabic engine tests (.NET 8)
+        if: ${{ inputs.run_tests }}
+        run: dotnet run --project Source/ArabicAutoTranslation.Tests/ArabicAutoTranslation.Tests.csproj -c Release -f net8.0 -- --report build/test-report-net8.txt
+
+      - name: Run Arabic engine tests (.NET Framework 4.7.2)
+        if: ${{ inputs.run_tests }}
+        run: dotnet run --project Source/ArabicAutoTranslation.Tests/ArabicAutoTranslation.Tests.csproj -c Release -f net472 -- --report build/test-report-net472.txt
+
+      # RimWorld 1.7: compiled against the public reference package Krafs.Rimworld.Ref 1.7.x-unstable and Harmony 3
+      # (see Source/ArabicAutoTranslation.RW17/ArabicAutoTranslation.RW17.csproj).
+      # continue-on-error: if this step fails, the other versions are still built and packaged, and the last step of
+      # the job then fails with a clear message, so a missing 1.7 folder can never go unnoticed.
+      - name: Build for RimWorld 1.7
+        if: ${{ inputs.build_1_7 }}
+        continue-on-error: true
+        run: dotnet build Source/ArabicAutoTranslation.RW17/ArabicAutoTranslation.RW17.csproj -c Release --no-incremental -p:BaseIntermediateOutputPath=obj/rw1.7/ -o build/1.7
+
+      - name: Build for RimWorld 1.6
+        if: ${{ inputs.build_1_6 }}
+        run: dotnet build Source/ArabicAutoTranslation.CI/ArabicAutoTranslation.CI.csproj -c Release --no-incremental -p:RimWorldVersion=1.6 -p:BaseIntermediateOutputPath=obj/rw1.6/ -o build/1.6
+
+      - name: Build for RimWorld 1.5
+        if: ${{ inputs.build_1_5 }}
+        run: dotnet build Source/ArabicAutoTranslation.CI/ArabicAutoTranslation.CI.csproj -c Release --no-incremental -p:RimWorldVersion=1.5 -p:BaseIntermediateOutputPath=obj/rw1.5/ -o build/1.5
+
+      - name: Build for RimWorld 1.4
+        if: ${{ inputs.build_1_4 }}
+        run: dotnet build Source/ArabicAutoTranslation.CI/ArabicAutoTranslation.CI.csproj -c Release --no-incremental -p:RimWorldVersion=1.4 -p:BaseIntermediateOutputPath=obj/rw1.4/ -o build/1.4
+
+      - name: Upload compiled DLLs as artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: ArabicAutoTranslation-dll
+          path: build/*/ArabicAutoTranslation.dll
+          if-no-files-found: error
+
+      - name: Assemble ready-to-install mod folder
+        if: ${{ inputs.package_mod }}
+        shell: pwsh
+        run: ./Tools/package_mod.ps1 -BuildRoot build -Output dist/ArabicAutoTranslation
+
+      # path is "dist" (not "dist/ArabicAutoTranslation") on purpose: the zip then contains the folder
+      # ArabicAutoTranslation itself, so it can be copied into RimWorld/Mods as it is.
+      - name: Upload ready-to-install mod folder as artifact
+        if: ${{ inputs.package_mod }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: ArabicAutoTranslation
+          path: dist
+          if-no-files-found: error
+
+      - name: Upload test reports as artifact
+        if: ${{ always() && inputs.run_tests }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: ArabicAutoTranslation-test-report
+          path: build/test-report-*.txt
+          if-no-files-found: warn
+
+      # Last step on purpose: if 1.7 was selected but is not in the mod folder, the run fails here (after the
+      # artifacts above are uploaded), so a missing 1.7 folder or DLL cannot go unnoticed.
+      - name: Check that 1.7 is in the mod folder
+        if: ${{ !cancelled() && inputs.build_1_7 && inputs.package_mod }}
+        shell: pwsh
+        run: |
+          $dll = 'dist/ArabicAutoTranslation/1.7/Assemblies/ArabicAutoTranslation.dll'
+          if (-not (Test-Path $dll)) {
+            Write-Host '::error title=RimWorld 1.7 is missing::The mod folder has no 1.7/Assemblies/ArabicAutoTranslation.dll. Open the step "Build for RimWorld 1.7" above to see why it failed.'
+            exit 1
+          }
+          Write-Host "OK: $dll is in the mod folder."
