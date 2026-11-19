@@ -19,7 +19,12 @@ namespace ArabicAutoTranslation.Utilities
             {
                 if (activeLang.keyedReplacements.ContainsKey(k)) continue;
 
-                res.Add(new KeyedReplacementParams(k, v, FindModContentPackOf(v.fileSourceFullPath)));
+                var mod = FindModContentPackOf(v.fileSourceFullPath);
+
+                // Core and the official DLCs are not touched unless the player ticked it in the settings
+                if (Settings.IsOfficialExcluded(mod?.PackageId)) continue;
+
+                res.Add(new KeyedReplacementParams(k, v, mod));
             }
 
             return res;

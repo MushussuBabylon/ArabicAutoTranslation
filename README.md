@@ -70,14 +70,16 @@ GOG:
 
 | التبويب | ما يمكنك تغييره |
 |---|---|
-| عام | تشغيل الترجمة أو إيقافها، واختيار ترجمة المودات المضافة حديثا تلقائيا أو لا |
+| عام | تشغيل الترجمة أو إيقافها، واختيار ترجمة المودات المضافة حديثا تلقائيا أو لا، وتفعيل ترجمة اللعبة الأساسية والإضافات الرسمية (متوقف افتراضيا) |
 | المترجم | اختيار خدمة الترجمة. الافتراضية Yandex مع تحويل تلقائي إلى Google |
 | التعديلات المستهدفة | اختيار المودات التي تُترجم |
 | محرر الترجمة | تصحيح أي نص مترجم، أو استبدال كلمة في نصوص كثيرة دفعة واحدة |
 | متقدم | حذف الترجمات المحفوظة إذا لم تُترجم بعض النصوص |
 | العربية | اختيار طريقة عرض النص العربي |
 
-**وضع النص (تبويب العربية):** الوضع الافتراضي *ربط الحروف وإعادة الترتيب* مناسب للعبة العادية. وإذا كنت تستخدم مودا آخر يعرض العربية بشكل صحيح (مثل ArabicSupport)، فاختر *نص منطقي عادي* حتى لا تُعالج النصوص مرتين.
+**وضع النص (تبويب العربية):** الوضع الافتراضي *ربط الحروف وإعادة الترتيب* مناسب للعبة العادية، وهو الوضع الذي يعمل مع مود ArabicSupport دون أي تعارض لأنه يتوقع نصا مربوط الحروف ومعاد الترتيب. أما إذا كنت تستخدم مودا يربط الحروف ويرتبها بنفسه أثناء الرسم، فاختر *نص منطقي عادي* حتى لا تُعالج النصوص مرتين.
+
+**اللعبة الأساسية والإضافات الرسمية:** لا يفحصها المود ولا يترجمها ولا يغيرها إلا إذا فعّلت الخيار *ترجمة اللعبة الأساسية RimWorld والإضافات الرسمية أيضا* من تبويب عام (ويسري بعد إعادة تشغيل اللعبة). فهي تأتي عادة من ترجمة عربية جاهزة مثل ArabicSupport، ويعمل هذا المود على المودات الأخرى فقط.
 
 ---
 
@@ -169,14 +171,16 @@ Open *Options → Mod settings → Arabic Auto Translation*. The defaults work w
 
 | Tab | What you can change |
 |---|---|
-| General | Turn translation on or off, and choose whether newly added mods are translated automatically |
+| General | Turn translation on or off, choose whether newly added mods are translated automatically, and turn on translation of RimWorld Core and the official DLCs (off by default) |
 | Translator | Pick the translation service. Yandex is the default, with automatic Google fallback |
 | Target Mods | Choose which mods get translated |
 | Translation Editor | Fix any translated text, or replace a word in many texts at once |
 | Advanced | Delete the saved translations if some texts did not translate |
 | Arabic | Choose how Arabic text is displayed |
 
-**Text mode (Arabic tab):** the default, *Shaped and reordered*, is right for the normal game. If you use another mod that already displays Arabic correctly (such as ArabicSupport), choose *Plain logical text* so the text is not processed twice.
+**Text mode (Arabic tab):** the default, *Shaped and reordered*, is right for the normal game. It is also the mode that works with ArabicSupport, which expects text that is already shaped and reordered, so the two mods do not conflict. Only if you use a mod that shapes and reorders Arabic itself while text is drawn, choose *Plain logical text* so the text is not processed twice.
+
+**RimWorld Core and the official DLCs:** this mod does not scan, translate or change them unless you turn on *Also translate RimWorld Core and the official DLCs* in the General tab (applied after a game restart). They normally come from a ready Arabic translation such as ArabicSupport; this mod works on other mods only.
 
 ---
 
