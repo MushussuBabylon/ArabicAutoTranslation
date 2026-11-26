@@ -13,6 +13,14 @@
     <AT_Setting_AutoTranslateNewMods>ترجمة التعديلات المضافة حديثاً تلقائياً (الافتراضي: تشغيل)</AT_Setting_AutoTranslateNewMods>
     <!-- EN: When off, mods added after this point are excluded from translation by default. You can enable them manually in the Target Mods tab. -->
     <AT_Setting_AutoTranslateNewMods_Tooltip>عند الإيقاف تستثنى التعديلات المضافة بعد هذه اللحظة من الترجمة افتراضياً. يمكنك تفعيلها يدوياً من تبويب التعديلات المستهدفة.</AT_Setting_AutoTranslateNewMods_Tooltip>
+    <!-- EN: Also translate RimWorld Core and the official DLCs (default: Off) -->
+    <AT_Setting_TranslateOfficial>ترجمة اللعبة الأساسية RimWorld والإضافات الرسمية أيضاً (الافتراضي: إيقاف)</AT_Setting_TranslateOfficial>
+    <!-- EN: When off, this mod does not scan, translate or change the game's own content: RimWorld Core and the official DLCs. Leave it off when another mod already provides their Arabic translation. Applied after a game restart. -->
+    <AT_Setting_TranslateOfficial_Tooltip>عند الإيقاف لا يفحص هذا التعديل محتوى اللعبة الأصلي ولا يترجمه ولا يغيره، وهو اللعبة الأساسية RimWorld والإضافات الرسمية. اتركه متوقفاً إذا كان تعديل آخر يوفر ترجمتها العربية. يسري التغيير بعد إعادة تشغيل اللعبة.</AT_Setting_TranslateOfficial_Tooltip>
+    <!-- EN: Restart the game to apply this change. -->
+    <AT_Setting_TranslateOfficial_Restart>أعد تشغيل اللعبة لتطبيق هذا التغيير.</AT_Setting_TranslateOfficial_Restart>
+    <!-- EN: RimWorld Core and the official DLCs are not translated. To include them, turn on the matching option in the General tab. -->
+    <AT_Setting_OfficialOffHint>اللعبة الأساسية RimWorld والإضافات الرسمية لا تترجم. لتضمينها فعّل الخيار المقابل من تبويب عام.</AT_Setting_OfficialOffHint>
     <!-- EN: Target language: Arabic (fixed) -->
     <AT_Setting_TargetLanguageFixed>لغة الترجمة: العربية (ثابتة)</AT_Setting_TargetLanguageFixed>
     <!-- EN: This mod translates into Arabic only. It does not matter which language the game itself is set to. -->
@@ -168,8 +176,8 @@
     <AT_Tab_General>عام</AT_Tab_General>
     <!-- EN: Translator -->
     <AT_Tab_Translator>المترجم</AT_Tab_Translator>
-    <!-- EN: Target Mods (Legacy) -->
-    <AT_Tab_TargetMods>التعديلات المستهدفة (قديم)</AT_Tab_TargetMods>
+    <!-- EN: Target Mods -->
+    <AT_Tab_TargetMods>التعديلات</AT_Tab_TargetMods>
     <!-- EN: Translation Editor -->
     <AT_Tab_TranslationEditor>محرر الترجمة</AT_Tab_TranslationEditor>
     <!-- EN: Advanced -->

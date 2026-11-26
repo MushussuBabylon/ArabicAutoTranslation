@@ -143,6 +143,7 @@ namespace ArabicAutoTranslation.Utilities
             // idle because ThingDef alone holds the majority of defs in big modpacks -
             // per-def work items keep every core busy
             var workItems = new List<(Type defType, Def def)>(1 << 14);
+            long officialSkipped = 0;
             foreach (var package in packages)
             {
                 if (!package.defType.IsSubclassOf(typeof(Def)))
@@ -152,6 +153,12 @@ namespace ArabicAutoTranslation.Utilities
                 }
                 foreach (var def in GenDefDatabase.GetAllDefsInDatabaseForDef(package.defType))
                 {
+                    // Core and the official DLCs are not even scanned unless the player ticked it in the settings
+                    if (Settings.IsOfficialExcluded(def.modContentPack?.PackageId))
+                    {
+                        officialSkipped++;
+                        continue;
+                    }
                     workItems.Add((package.defType, def));
                 }
             }
@@ -314,7 +321,7 @@ namespace ArabicAutoTranslation.Utilities
             Log.Message(ArabicAutoTranslation.LogPrefix +
                 $"FindMissingDefInjection: total={swTotal.ElapsedMilliseconds}ms " +
                 $"(dict={msDictBuild}ms, flatten={msFlatten}ms, traverse={msTraverse}ms, callbacks={msCallbacks}ms), " +
-                $"defs={workItems.Count}, strings={stringsVisited}, missing={resultBag.Count}, " +
+                $"defs={workItems.Count} (Core/official DLC defs left alone: {officialSkipped}), strings={stringsVisited}, missing={resultBag.Count}, " +
                 $"handleFails={_brokenHandleElementTypes.Count}, pruned={System.Threading.Interlocked.Read(ref _prunedObjects)}, " +
                 $"gcCollections={gcCountAfter - gcCountBefore}, memDelta={(memAfter - memBefore) / (1024 * 1024)}MB " +
                 $"| slowest types (CPU): {string.Join(", ", slowest)}");

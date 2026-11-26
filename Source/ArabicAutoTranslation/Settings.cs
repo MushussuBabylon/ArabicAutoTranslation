@@ -35,6 +35,10 @@ namespace ArabicAutoTranslation
         public static int ArabicRenderMode = 0;
         // wrap English words, numbers and placeholders inside Arabic text in direction isolates
         public static bool ArabicLtrIsolates = true;
+        // RimWorld's own content (Core and the official DLCs) is left completely alone unless this is ticked:
+        // it is not scanned, not translated and not changed. Another mod (for example a ready Arabic translation of the
+        // game) is expected to provide it. Applied after a game restart.
+        public static bool TranslateOfficialContent = false;
         public static HashSet<string> BlackListModPackageIds = new HashSet<string>();
         public static HashSet<string> SeenModPackageIds = new HashSet<string>();
 
@@ -69,6 +73,7 @@ namespace ArabicAutoTranslation
         private static string _editingValue = "";
         private static bool _restartRequired = false;
         private static bool _arabicOptionsPending = false;
+        private static bool _officialChangePending = false;
         private const float RowHeight = 35f;
         private const float GroupHeaderHeight = 30f;
         private const float SubGroupHeaderHeight = 28f;
@@ -100,6 +105,7 @@ namespace ArabicAutoTranslation
             Scribe_Values.Look(ref EnableAutoTranslation, "ArabicAutoTranslation_EnableAutoTranslation", true);
             Scribe_Values.Look(ref AutoFallback, "ArabicAutoTranslation_AutoFallback", true);
             Scribe_Values.Look(ref AutoTranslateNewMods, "ArabicAutoTranslation_AutoTranslateNewMods", true);
+            Scribe_Values.Look(ref TranslateOfficialContent, "ArabicAutoTranslation_TranslateOfficialContent", false);
             Scribe_Values.Look(ref ArabicRenderMode, "ArabicAutoTranslation_ArabicRenderMode", 0);
             Scribe_Values.Look(ref ArabicLtrIsolates, "ArabicAutoTranslation_ArabicLtrIsolates", true);
             Scribe_Collections.Look(ref BlackListModPackageIds, "ArabicAutoTranslation_WhiteListModPackageIds", LookMode.Value);
@@ -133,6 +139,27 @@ namespace ArabicAutoTranslation
             if (BlackListModPackageIds == null) BlackListModPackageIds = new HashSet<string>();
             if (SeenModPackageIds == null) SeenModPackageIds = new HashSet<string>();
             if (ArabicRenderMode < 0 || ArabicRenderMode > 2) ArabicRenderMode = 0;
+        }
+
+        /// <summary>True for RimWorld's own content: Core and the official DLCs (ludeon.rimworld, ludeon.rimworld.royalty, ...).</summary>
+        internal static bool IsOfficialPackageId(string packageId)
+        {
+            if (string.IsNullOrEmpty(packageId)) return false;
+            return packageId.Equals("ludeon.rimworld", StringComparison.OrdinalIgnoreCase) ||
+                   packageId.StartsWith("ludeon.rimworld.", StringComparison.OrdinalIgnoreCase);
+        }
+
+        /// <summary>True when this is official content and the player did not ask for it to be translated.</summary>
+        internal static bool IsOfficialExcluded(string packageId)
+        {
+            return !TranslateOfficialContent && IsOfficialPackageId(packageId);
+        }
+
+        /// <summary>True when nothing of this mod may be translated: the player switched it off, or it is official content that is left alone.</summary>
+        internal static bool IsModExcluded(string packageId)
+        {
+            if (string.IsNullOrEmpty(packageId)) return false;
+            return BlackListModPackageIds.Contains(packageId) || IsOfficialExcluded(packageId);
         }
 
         /// <summary>
@@ -244,6 +271,18 @@ namespace ArabicAutoTranslation
             }
 
             ls.CheckboxLabeled("AT_Setting_AutoTranslateNewMods".Translate(), ref AutoTranslateNewMods, "AT_Setting_AutoTranslateNewMods_Tooltip".Translate());
+
+            // Core and the official DLCs: off by default, so this mod only works on other mods' texts
+            var officialBefore = TranslateOfficialContent;
+            ls.CheckboxLabeled("AT_Setting_TranslateOfficial".Translate(), ref TranslateOfficialContent, "AT_Setting_TranslateOfficial_Tooltip".Translate());
+            if (officialBefore != TranslateOfficialContent) _officialChangePending = true;
+            if (_officialChangePending)
+            {
+                var officialColor = GUI.color;
+                GUI.color = Color.yellow;
+                ls.Label("AT_Setting_TranslateOfficial_Restart".Translate());
+                GUI.color = officialColor;
+            }
 
             // The target language is fixed: this mod translates into Arabic only
             ls.Gap(6f);
@@ -537,11 +576,14 @@ namespace ArabicAutoTranslation
                 translationStats.TryGetValue(curMod.PackageId ?? "", out var stats);
                 string statText = $"{stats.Item1}/{stats.Item3} + {stats.Item2}/{stats.Item4}";
                 
-                var tmp = !BlackListModPackageIds.Contains(curMod.PackageId);
+                // Core and the official DLCs are locked (shown unticked, not clickable) until the General tab option is on
+                var officialLocked = IsOfficialExcluded(curMod.PackageId);
+                var tmp = !officialLocked && !BlackListModPackageIds.Contains(curMod.PackageId);
                 var tmp2 = tmp;
                 
                 var labelRect = new Rect(entryHeight + 5f, 0f, entryRect.width - entryHeight - 80f, entryHeight);
-                Widgets.CheckboxLabeled(labelRect, $"{curMod.Name} ({curMod.PackageId}) - {statText}", ref tmp);
+                Widgets.CheckboxLabeled(labelRect, $"{curMod.Name} ({curMod.PackageId}) - {statText}", ref tmp, officialLocked);
+                if (officialLocked) TooltipHandler.TipRegion(labelRect, "AT_Setting_OfficialOffHint".Translate());
                 
                 if (tmp != tmp2)
                 {
@@ -575,7 +617,7 @@ namespace ArabicAutoTranslation
                 }
                 
                 // Retranslate Button
-                if (BlackListModPackageIds.Contains(curMod.PackageId))
+                if (!officialLocked && BlackListModPackageIds.Contains(curMod.PackageId))
                 {
                      var retranslateRect = new Rect(entryRect.width - 75f, 0f, 70f, entryHeight);
                      if (Widgets.ButtonText(retranslateRect, "AT_Setting_Retranslate".Translate()))

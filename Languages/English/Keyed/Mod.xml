@@ -7,6 +7,10 @@
     <AT_Setting_AutoTranslationOff>Only cached translations are used.</AT_Setting_AutoTranslationOff>
     <AT_Setting_AutoTranslateNewMods>Automatically translate newly added mods (default: On)</AT_Setting_AutoTranslateNewMods>
     <AT_Setting_AutoTranslateNewMods_Tooltip>When off, mods added after this point are excluded from translation by default. You can enable them manually in the Target Mods tab.</AT_Setting_AutoTranslateNewMods_Tooltip>
+    <AT_Setting_TranslateOfficial>Also translate RimWorld Core and the official DLCs (default: Off)</AT_Setting_TranslateOfficial>
+    <AT_Setting_TranslateOfficial_Tooltip>When off, this mod does not scan, translate or change the game's own content: RimWorld Core and the official DLCs. Leave it off when another mod already provides their Arabic translation. Applied after a game restart.</AT_Setting_TranslateOfficial_Tooltip>
+    <AT_Setting_TranslateOfficial_Restart>Restart the game to apply this change.</AT_Setting_TranslateOfficial_Restart>
+    <AT_Setting_OfficialOffHint>RimWorld Core and the official DLCs are not translated. To include them, turn on the matching option in the General tab.</AT_Setting_OfficialOffHint>
     <AT_Setting_TargetLanguageFixed>Target language: Arabic (fixed)</AT_Setting_TargetLanguageFixed>
     <AT_Setting_TargetLanguageFixed_Tooltip>This mod translates into Arabic only. It does not matter which language the game itself is set to.</AT_Setting_TargetLanguageFixed_Tooltip>
 
@@ -91,7 +95,7 @@
     <!-- Tab Names -->
     <AT_Tab_General>General</AT_Tab_General>
     <AT_Tab_Translator>Translator</AT_Tab_Translator>
-    <AT_Tab_TargetMods>Target Mods (Legacy)</AT_Tab_TargetMods>
+    <AT_Tab_TargetMods>Target Mods</AT_Tab_TargetMods>
     <AT_Tab_TranslationEditor>Translation Editor</AT_Tab_TranslationEditor>
     <AT_Tab_Advanced>Advanced</AT_Tab_Advanced>
     

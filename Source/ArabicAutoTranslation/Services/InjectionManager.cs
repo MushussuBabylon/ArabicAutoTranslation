@@ -148,8 +148,8 @@ namespace ArabicAutoTranslation.Services
 
         internal static void InjectMissingDefInjection(DefInjectionUtilityCustom.DefInjectionUntranslatedParams @params)
         {
-            if (!string.IsNullOrEmpty(@params.def?.modContentPack?.PackageId) &&
-                    Settings.BlackListModPackageIds.Contains(@params.def?.modContentPack?.PackageId)) return;
+            // switched off by the player, or Core / an official DLC while that option is off
+            if (Settings.IsModExcluded(@params.def?.modContentPack?.PackageId)) return;
 
             if (!@params.isCollection)
             {
@@ -461,7 +461,7 @@ namespace ArabicAutoTranslation.Services
 
             foreach (var @param in keyedMissing)
             {
-                if (@param.mod?.PackageId != null && Settings.BlackListModPackageIds.Contains(@param.mod.PackageId)) continue;
+                if (Settings.IsModExcluded(@param.mod?.PackageId)) continue;
                 
                 // Keyed replacement params usually don't have FieldInfo, but they are generally safe text.
                 // However, we should still watch out for path-like strings in keyed data.
@@ -495,7 +495,7 @@ namespace ArabicAutoTranslation.Services
 
             foreach (var @param in keyedMissing.Where(x => x.mod == targetMod))
             {
-                if (@param.mod?.PackageId != null && Settings.BlackListModPackageIds.Contains(@param.mod.PackageId)) continue;
+                if (Settings.IsModExcluded(@param.mod?.PackageId)) continue;
                 
                 if (DefInjectionUtilityCustom.ShouldTranslate(@param.value.value, null))
                 {

@@ -41,6 +41,9 @@ namespace ArabicAutoTranslation.Arabic
         internal const string CacheFolderName = "ArabicCache";
         internal const string GlossaryFileName = "ArabicGlossary.txt";
         private const string OwnPackageId = "mushussubabylon.arabicautotranslation";
+        // The author's own ArabicSupport mod (Arabic translation of Core and the DLCs with ready-shaped, reordered text, plus the
+        // fonts and line wrapping). It works together with this mod's default "shaped and reordered" text, so it is never reported.
+        private const string ArabicSupportPackageId = "mushussubabylon.arabicsupport";
 
         /// <summary>Root folder of this mod (set by the mod constructor); the bundled glossary lives in its Arabic folder.</summary>
         internal static string ModRoot;
@@ -258,6 +261,7 @@ namespace ArabicAutoTranslation.Arabic
                 {
                     var id = mod.PackageId ?? "";
                     if (id.StartsWith(OwnPackageId, StringComparison.OrdinalIgnoreCase)) continue;
+                    if (id.Equals(ArabicSupportPackageId, StringComparison.OrdinalIgnoreCase)) continue;
                     if (OtherArabicMod.IsMatch(id + " " + (mod.Name ?? "")))
                     {
                         var msg = "Another mod that may shape Arabic text is active: " + mod.Name + " (" + id + "). " +
